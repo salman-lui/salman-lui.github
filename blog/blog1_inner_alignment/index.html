@@ -289,16 +289,75 @@
   <div class="flex-container">
     <!-- Table of Contents -->
     <div class="toc">
-        <h3>Contents</h3>
-        <div class="main-section"><a href="#intro">Introduction</a></div>
-        <ul>
-            <li><a href="#motivation">Motivation</a></li>
-        </ul>
-        <div class="main-section"><a href="#approach">Approach</a></div>
-        <div class="main-section"><a href="#highlight">Highlight</a></div>
-        <ul>
-            <li><a href="#recent-work">Recent Work</a></li>
-        </ul>
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#intro">Introduction</a>
+                <ul>
+                    <li><a href="#understanding-llm">Understanding LLM reasoning and why it matters</a></li>
+                    <li><a href="#framework">The two-dimensional framework: Regimes and Architectures</a></li>
+                </ul>
+            </li>
+            <li><a href="#understanding-framework">Understanding the Reasoning Framework</a>
+                <ul>
+                    <li><a href="#reasoning-regimes">Reasoning Regimes: Inference Scaling vs. Learning-to-Reason</a></li>
+                    <li><a href="#system-architectures">System Architectures: Standalone to Multi-Agent Systems</a></li>
+                    <li><a href="#unified-perspective">The unified input-output perspective</a></li>
+                </ul>
+            </li>
+            <li><a href="#inference-scaling">Inference Scaling Approaches</a>
+                <ul>
+                    <li><a href="#prompt-engineering">Prompt engineering for better reasoning</a></li>
+                    <li><a href="#search-planning">Search and planning methods</a></li>
+                    <li><a href="#feedback-refinement">Feedback-based refinement</a></li>
+                    <li><a href="#tool-integration">Tool integration</a></li>
+                </ul>
+            </li>
+            <li><a href="#learning-to-reason">Learning-to-Reason Methods</a>
+                <ul>
+                    <li><a href="#data-collection">High-quality data collection strategies</a></li>
+                    <li><a href="#supervised-fine-tuning">Supervised fine-tuning for reasoning</a></li>
+                    <li><a href="#reinforcement-learning">Reinforcement learning approaches</a></li>
+                    <li><a href="#preference-learning">Preference learning techniques</a></li>
+                </ul>
+            </li>
+            <li><a href="#learning-algorithms">Learning Algorithms Behind Reasoning</a>
+                <ul>
+                    <li><a href="#sft">Supervised Fine-Tuning (SFT)</a></li>
+                    <li><a href="#rl">Reinforcement Learning (GRPO, PPO)</a></li>
+                    <li><a href="#dpo">Direct Preference Optimization (DPO)</a></li>
+                    <li><a href="#training-verifiers">Training verifiers and reward models</a></li>
+                </ul>
+            </li>
+            <li><a href="#domain-specific">Domain-Specific Reasoning Applications</a>
+                <ul>
+                    <li><a href="#mathematical">Mathematical reasoning</a></li>
+                    <li><a href="#code-generation">Code generation</a></li>
+                    <li><a href="#tabular-data">Tabular data reasoning</a></li>
+                    <li><a href="#game-theoretic">Game-theoretic reasoning</a></li>
+                </ul>
+            </li>
+            <li><a href="#key-trends">Key Trends and Breakthroughs</a>
+                <ul>
+                    <li><a href="#shift">The shift from inference scaling to learning</a></li>
+                    <li><a href="#agentic-systems">The emergence of agentic reasoning systems</a></li>
+                    <li><a href="#milestones">Recent model milestones (DeepSeek-R1, OpenAI o1)</a></li>
+                </ul>
+            </li>
+            <li><a href="#open-challenges">Open Challenges and Future Directions</a>
+                <ul>
+                    <li><a href="#evaluating">Evaluating reasoning beyond outcomes</a></li>
+                    <li><a href="#understanding-mechanisms">Understanding reasoning mechanisms</a></li>
+                    <li><a href="#data-challenges">Data challenges in scaling reasoning capabilities</a></li>
+                    <li><a href="#cost-aware">Cost-aware training approaches</a></li>
+                </ul>
+            </li>
+            <li><a href="#conclusion">Conclusion</a>
+                <ul>
+                    <li><a href="#future">The future of reasoning in LLMs</a></li>
+                    <li><a href="#implications">Implications for AI development</a></li>
+                </ul>
+            </li>
+        </ol>
     </div>
 
   <!-- Heading and intro -->
@@ -306,7 +365,7 @@
 
   <div class="content">
 
-    <h1 class="blog-title">A Dive into AI Safety: Key Resources and Influential Works</h1>
+    <h1 class="blog-title">From Inference to Learning: The Evolution of LLM Reasoning</h1>
     <p>
       This focuses on providing a comprehensive overview of the AI Safety field, guiding the reader through seminal works, evolving discussions, and the ongoing dialogue around machine intelligence's ethical and practical implications.
     </p>
@@ -359,7 +418,7 @@
       Existing generative modeling techniques can largely be grouped into two categories based on how they represent probability distributions.
   </p>
   <p>
-      Likelihood-based models, which directly learn the distribution’s probability density (or mass) function via (approximate) maximum likelihood. Typical likelihood-based models include autoregressive models 
+      Likelihood-based models, which directly learn the distribution's probability density (or mass) function via (approximate) maximum likelihood. Typical likelihood-based models include autoregressive models 
       <a href="#ref1">[1]</a>, <a href="#ref2">[2]</a>, <a href="#ref3">[3]</a>, normalizing flow models 
       <a href="#ref4">[4]</a>, <a href="#ref5">[5]</a>, energy-based models (EBMs)
       <a href="#ref6">[6]</a>, <a href="#ref7">[7]</a>, and variational auto-encoders (VAEs) 
