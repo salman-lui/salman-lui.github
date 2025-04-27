@@ -367,7 +367,7 @@
 
     <h1 class="blog-title">From Inference to Learning: The Evolution of LLM Reasoning</h1>
     <p>
-      This focuses on providing a comprehensive overview of the AI Safety field, guiding the reader through seminal works, evolving discussions, and the ongoing dialogue around machine intelligence's ethical and practical implications.
+      This blog post provides a comprehensive overview of the evolution of reasoning capabilities in Large Language Models (LLMs), exploring the transition from inference-time scaling to learning-based approaches, and examining the implications for future AI development.
     </p>
 </div>
 
@@ -389,7 +389,7 @@
     </div>
     <div>
       <strong>PUBLISHED</strong>
-      May 5, 2023
+      May 5, 2024
     </div>
   </div>
 
@@ -415,157 +415,349 @@
   <hr> <!-- Horizontal divider -->
 
   <p>
-      Existing generative modeling techniques can largely be grouped into two categories based on how they represent probability distributions.
+      Reasoning—the cognitive process that enables logical inference, problem-solving, and decision-making—has emerged as a critical capability that distinguishes advanced AI systems from conventional models. As large language models (LLMs) continue to advance, their ability to reason has become increasingly important, not just for solving complex problems but as a pathway toward more sophisticated AI systems approaching artificial general intelligence (AGI).
   </p>
+
   <p>
-      Likelihood-based models, which directly learn the distribution's probability density (or mass) function via (approximate) maximum likelihood. Typical likelihood-based models include autoregressive models 
-      <a href="#ref1">[1]</a>, <a href="#ref2">[2]</a>, <a href="#ref3">[3]</a>, normalizing flow models 
-      <a href="#ref4">[4]</a>, <a href="#ref5">[5]</a>, energy-based models (EBMs)
-      <a href="#ref6">[6]</a>, <a href="#ref7">[7]</a>, and variational auto-encoders (VAEs) 
-      <a href="#ref8">[8]</a>, <a href="#ref9">[9]</a>.
+      But what exactly constitutes reasoning in LLMs? At its core, LLM reasoning involves going beyond direct pattern recognition to generate a step-by-step thinking process in the form of "question → reasoning steps → answer." Rather than simply producing answers from questions, reasoning LLMs can articulate their thought process, making their decision-making more transparent and often more accurate.
   </p>
 
+  <!-- Figure Section -->
+  <div class="l-body">
+    <figure>
+        <img class="img-fluid rounded z-depth-1" src="fig/fig1.png" alt="Description of the figure for accessibility">
+        <figcaption style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+            Optional caption for the figure if needed.
+        </figcaption>
+    </figure>
+  </div>
 
-<!-- Figure Section -->
-<div class="l-body">
-  <figure>
-      <img class="img-fluid rounded z-depth-1" src="fig/fig1.png" alt="Description of the figure for accessibility">
-      <figcaption style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
-          Optional caption for the figure if needed.
-      </figcaption>
-  </figure>
-</div>
-
-  <!-- Motivation: Subitem -->
-  <p id="motivation" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Motivation</p>
- <!-- Math -->
-
-
-<p>
-  In order to build such a generative model, we first need a way to represent a probability distribution. One such way, as in likelihood-based models, is to directly model the probability density function (p.d.f.) or probability mass function (p.m.f.). Let \( f_\theta \) be a real-valued function parameterized by a learnable parameter \( \theta \). We can define a p.d.f. \( p_\theta(x) \) via
-  </p>
-  
-  \begin{equation}
-  p_\theta(x) = \frac{e^{-f_\theta(x)}}{Z_\theta}
-  \end{equation}
-  
+  <h3 id="understanding-llm">Understanding LLM reasoning and why it matters</h3>
   <p>
-  where \( Z_\theta \) is a normalizing constant dependent on \( \theta \), such that \( \int p_\theta(x) dx = 1 \). Here the function \( f_\theta \) is often called an unnormalized probabilistic model, or energy-based model <a href="#ref7">[7]</a>.
+      The landscape of LLM reasoning research can be organized along two orthogonal dimensions:
   </p>
-  
+
   <p>
-  We can train \( f_\theta \) by maximizing the log-likelihood of the data.
-  </p>  
-
-
-  <!-- Approach Section -->
-
-  <h2 id="approach" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Approach</h2>
-    <hr> <!-- Horizontal divider -->
-
-    <p>
-        No Hugo dependency, no theme dependency, it’s a very stable format with the ability to customize just enough with a bit of effort. Think a self-hosted Medium.com in appearance. Very minimal, lightly themed, focused on writing and code! Again, I think that for someone getting started with creating websites or blogs it’s a very good starting point.
-    </p>
-
-    <p>
-        With distill you render/knit your articles locally, so you can quickly check your work without having to deploy to a git branch or to production. I do think that eventually it is a good idea to have git branches for previews or collaboration, but that’s a lot to ask for an initial first stab at a blog/site.
-    </p>
-
-    <p>
-        distill also natively supports citations, footnotes and asides, a rich auto-generated table of contents, support for HTMLwidgets and/or custom javascript, and a reader friendly typography that is mobile friendly/auto-adapts to mobile.
-    </p>
-
-    <p>
-        Another nicety is the ability to import a post with import_post(). This means you can take an existing blogpost from another website and import it into your new blog. This “does not require the original R Markdown document used to author the post—you only need access to the published HTML of a post to import it.”
-    </p>
-
-    <p>
-        Lastly, I am always amazed at the power of both blogdown and the more recent hugodown, but you are still relying on a changing version of Hugo and your theme over time. For a personal blog I personally prefer distill because I can get busy, neglect my blog for a year, come back to write a new post, and it still just works.
-    </p>
-
-    <p>
-        However, blogdown and hugodown allow dramatically more customization. distill is truly an opinionated framework, and most of the easy customization you can do is fonts, colors, and the navbar. If you expect to create gorgeous custom-layout sites like education.rstudio.com or something like Desirée de Leon’s blog you’re likely going to be disappointed!
-    </p>
-
-    <p>
-        Again, for my blog I really just wanted a simple but in my opinion elegant minimalist theme, so I was fine with the tradeoff, as I would have built something similar with blogdown anyway!
-    </p>
-
-    <p>
-        Blogdown also supports other static site generators like Jekyll in place of Hugo, and a rich set of pre-built themes across the various generators. The structure of the site is extensible as well, so you can generate a site that truly looks like your own creation.
-    </p>
-
-    <p>
-        Lastly, note that you DO lose some niceties like hugo shortcodes for embedding, and again there is ONLY ONE THEME. Most appearance customization is done at the level of custom CSS.
-    </p>
-
-    <p>
-        If you’re still with me, here’s how to make it!
-    </p>
-
-
-   <!-- Highlight Section -->
-
-   <h2 id="highlight" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Highlight</h2>
-   <hr> <!-- Horizontal divider -->
-
-   <p>
-       No Hugo dependency, no theme dependency, it’s a very stable format with the ability to customize just enough with a bit of effort. Think a self-hosted Medium.com in appearance. Very minimal, lightly themed, focused on writing and code! Again, I think that for someone getting started with creating websites or blogs it’s a very good starting point.
-   </p> 
-   
-  <!-- Recent Work: Subitem -->
-  <p id="recent-work" style="font-weight: bold;">Recent Work</p>
-  <p>
-      This script tag will modify your post in your browser, adding the Distill styling and functionality. When we publish your article, we will bake in these transformations, but during development it’s handy to be able to preview it locally (It even works without a web server).
+      1. <strong>Reasoning Regimes</strong>: This dimension concerns when and how reasoning is achieved. We can distinguish between:
+      - <strong>Inference Scaling</strong>: Enhancing reasoning through additional test-time computation
+      - <strong>Learning-to-Reason</strong>: Building reasoning capabilities during the training phase
   </p>
-   
-</div>
 
+  <p>
+      2. <strong>System Architectures</strong>: This dimension addresses what components are involved in the reasoning process:
+      - <strong>Standalone LLMs</strong>: Reasoning within a single model
+      - <strong>Single-Agent Systems</strong>: LLMs enhanced with external tools or environments
+      - <strong>Multi-Agent Systems</strong>: Multiple LLMs interacting to solve problems collaboratively
+  </p>
 
+  <h3 id="framework">The two-dimensional framework: Regimes and Architectures</h3>
+  <p>
+      These dimensions provide a structured framework for understanding the rapidly evolving field of LLM reasoning, highlighting important trends like the shift from inference-time scaling to learning-to-reason approaches, and from standalone models to agentic systems.
+  </p>
 
-<!-- Footnotes -->
+  <h2 id="understanding-framework" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Understanding the Reasoning Framework</h2>
+  <hr>
 
-<div class="content" style="
-    font-size: 0.92em;
-    line-height: 1.7em;
-    color: rgba(0, 0, 0, 0.5);">
-    <h3 style="
-        font-size: 16px;
-        font-weight: 500;
-        margin-top: 1em;
-        margin-bottom: 0;
-        color: rgba(0, 0, 0, 0.65);">Footnotes</h3>
-    <p id="note1" style="
-        margin: 0;
-        padding: 0;">1. Hereafter we only consider probability ... <a href="#fn1ref" style="color: rgba(0, 0, 0, 0.6);">[↩]</a></p>
-    <p id="note2" style="
-        margin: 0;
-        padding: 0;">2. Fisher divergence is ... <a href="#fn2ref" style="color: rgba(0, 0, 0, 0.6);">[↩]</a></p>
-</div>
+  <h3 id="reasoning-regimes">Reasoning Regimes: Inference Scaling vs. Learning-to-Reason</h3>
+  <p>
+      The first dimension of our framework examines when reasoning capabilities emerge in LLMs:
+  </p>
 
-<!--  References  -->
+  <p>
+      <strong>Inference Scaling</strong> involves techniques that enhance reasoning during test time without updating the model parameters. These methods add computational steps before generating a final answer, allowing the model to "think" before responding. Chain-of-Thought (CoT) prompting is a prime example—by instructing an LLM to "think step by step," we can elicit better reasoning without any fine-tuning.
+  </p>
 
-  <div class="content" style="
-  font-size: 0.92em;
-  line-height: 1.7em;
-  color: rgba(0, 0, 0, 0.5);">
-  <h2 style="
-      font-size: 16px;
-      font-weight: 500;
-      margin-top: 1em;
-      margin-bottom: 0;
-      color: rgba(0, 0, 0, 0.65);">References</h2>
-  <ol style="
-      padding: 0 0 0 15px;
-      @media (min-width: 768px) {
-        padding: 0 0 0 30px;
-        margin-left: -30px;
-      }">
-      <li id="ref1">The neural autoregressive distribution estimator ...</li>
-      <li id="ref2">Made: Masked autoencoder for distribution estimation ...</li>
-      <!-- Add the remaining references in the same format -->
-  </ol>
-</div>
+  <p>
+      <strong>Learning-to-Reason</strong> shifts the focus to training models specifically for reasoning capabilities. Rather than relying on inference-time computation, this approach incorporates reasoning into the training process itself. Recent work like DeepSeek-R1 demonstrates that models can be trained to reason effectively without extensive inference-time computation.
+  </p>
+
+  <h3 id="system-architectures">System Architectures: Standalone to Multi-Agent Systems</h3>
+  <p>
+      The second dimension explores the components involved in reasoning:
+  </p>
+
+  <p>
+      <strong>Standalone LLMs</strong> reason entirely within a single model. They process an input prompt and generate outputs that include both answers and the reasoning steps that led to them. While limited to their pre-trained knowledge, these models can still demonstrate impressive reasoning through techniques like self-consistency or multiple sampling.
+  </p>
+
+  <p>
+      <strong>Single-Agent Systems</strong> enhance standalone LLMs by enabling interaction with external tools or environments. These systems can retrieve information, use specialized tools (like calculators or code interpreters), and receive feedback to refine their reasoning.
+  </p>
+
+  <p>
+      <strong>Multi-Agent Systems</strong> involve multiple LLMs interacting to solve problems collaboratively. Each agent can take on a specialized role (critic, executor, planner, etc.), allowing for more complex reasoning through the exchange of messages and coordinated actions.
+  </p>
+
+  <h3 id="unified-perspective">The unified input-output perspective</h3>
+  <p>
+      Despite their differences, these approaches can be understood through a unified lens of inputs and outputs. In standalone models, the focus is on constructing better prompts (inputs) and optimizing the generated responses (outputs). In single-agent systems, this translates to perception (input) and action (output). For multi-agent systems, it becomes communication (input) and coordination (output).
+  </p>
+
+  <h2 id="inference-scaling" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Inference Scaling Approaches</h2>
+  <hr>
+
+  <h3 id="prompt-engineering">Prompt engineering for better reasoning</h3>
+  <p>
+      One of the simplest yet most effective ways to improve reasoning in LLMs is through careful prompt design.
+  </p>
+
+  <p>
+      <strong>Instruction Engineering</strong> focuses on crafting prompts that explicitly elicit reasoning. Templates like "Let's think step by step" have proven remarkably effective. Advanced approaches like Automatic Prompt Engineer (APE) even use LLMs themselves to generate high-quality instructions.
+  </p>
+
+  <p>
+      <strong>Demonstration Engineering</strong> leverages the power of examples. Analogical prompting guides LLMs to generate relevant examples before solving a problem—for instance, prompting a model to generate a problem about calculating a third-order determinant before solving a fourth-order one.
+  </p>
+
+  <h3 id="search-planning">Search and planning methods</h3>
+  <p>
+      Beyond prompt engineering, inference scaling can employ more sophisticated search and planning methods:
+  </p>
+
+  <p>
+      <strong>Task Decomposition</strong> breaks complex problems into manageable subtasks. Methods like Least-to-Most Prompting or Plan-and-Solve guide LLMs in approaching problems incrementally, tackling simpler components before addressing the whole.
+  </p>
+
+  <p>
+      <strong>Exploration and Search</strong> techniques like Tree-of-Thoughts and Graph-of-Thoughts allow LLMs to explore multiple reasoning paths simultaneously, rather than committing to a single chain of thought.
+  </p>
+
+  <h3 id="feedback-refinement">Feedback-based refinement</h3>
+  <p>
+      Feedback mechanisms can significantly enhance reasoning quality during inference:
+  </p>
+
+  <p>
+      <strong>Verifiers and Reflection</strong> employ either separate models or the same model to evaluate and improve reasoning. Techniques like self-consistency sampling multiple solutions and selecting the most common answer, while more advanced approaches use dedicated verifier models to provide detailed feedback on reasoning steps.
+  </p>
+
+  <h3 id="tool-integration">Tool integration</h3>
+  <p>
+      Integration with external tools expands an LLM's reasoning capabilities:
+  </p>
+
+  <p>
+      <strong>Retrieval Augmentation</strong> enhances reasoning by enabling access to external knowledge, reducing hallucinations and ensuring more accurate, fact-based responses. This is particularly valuable for knowledge-intensive tasks requiring multi-hop and long-horizon reasoning.
+  </p>
+
+  <p>
+      <strong>Specialized Tools</strong> like calculators, compilers, or domain-specific APIs help overcome inherent limitations of language models. For example, MATHSENSEI employs tools such as Python, WolframAlpha, and search engines to solve complex mathematical problems with higher accuracy than is possible with an LLM alone.
+  </p>
+
+  <h2 id="learning-to-reason" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Learning-to-Reason Methods</h2>
+  <hr>
+
+  <h3 id="data-collection">High-quality data collection strategies</h3>
+  <p>
+      Effective learning-to-reason requires high-quality training data:
+  </p>
+
+  <p>
+      <strong>Question Augmentation</strong> expands existing datasets using techniques like rewriting, transforming, or evolving questions to cover a broader range of scenarios and difficulty levels.
+  </p>
+
+  <p>
+      <strong>Knowledge Graph-Based Synthesis</strong> utilizes structured taxonomies to generate questions with broader knowledge coverage. This approach helps overcome limitations of direct augmentation by ensuring that generated questions span relevant conceptual spaces systematically.
+  </p>
+
+  <h3 id="supervised-fine-tuning">Supervised fine-tuning for reasoning</h3>
+  <p>
+      Supervised Fine-Tuning (SFT) is the most straightforward approach to training reasoning-capable LLMs:
+  </p>
+
+  <p>
+      <strong>Reasoning Distillation</strong> transfers reasoning capabilities from more powerful models to smaller ones. Projects like the NovaSky Team and Bespoke Labs have successfully distilled reasoning chains from models like OpenAI-o1 and DeepSeek-R1 into smaller, more efficient models.
+  </p>
+
+  <h3 id="reinforcement-learning">Reinforcement learning approaches</h3>
+  <p>
+      Reinforcement Learning (RL) has emerged as a powerful approach for teaching LLMs to reason:
+  </p>
+
+  <p>
+      <strong>GRPO (Group-Relative Policy Optimization)</strong> samples multiple outputs for each input, computes rewards, and determines the relative advantage of each output within the group. This method has shown remarkable success in DeepSeek-R1, enabling the model to learn sophisticated behaviors like reflection and alternative approach exploration.
+  </p>
+
+  <h3 id="preference-learning">Preference learning techniques</h3>
+  <p>
+      Preference learning optimizes models based on explicit preferences between different reasoning paths:
+  </p>
+
+  <p>
+      <strong>Direct Preference Optimization (DPO)</strong> and its variants learn directly from preference data without a separate reward model. These approaches use a simple binary classification loss to optimize the policy based on pairs of preferred and non-preferred outputs.
+  </p>
+
+  <h2 id="learning-algorithms" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Learning Algorithms Behind Reasoning</h2>
+  <hr>
+
+  <h3 id="sft">Supervised Fine-Tuning (SFT)</h3>
+  <p>
+      SFT remains the foundation of many reasoning approaches, adapting pre-trained LLMs for reasoning tasks:
+  </p>
+
+  <p>
+      <strong>Token-Level SFT</strong> optimizes the model to predict the next token given previous tokens, maximizing the log probability of the ground truth sequence. It's the default first step in training reasoning models but may not fully capture the multi-step nature of reasoning.
+  </p>
+
+  <h3 id="rl">Reinforcement Learning (GRPO, PPO)</h3>
+  <p>
+      RL algorithms have produced some of the most impressive results in reasoning:
+  </p>
+
+  <p>
+      <strong>PPO (Proximal Policy Optimization)</strong> uses a clipped surrogate objective to prevent too large policy updates, ensuring stable training. It typically employs a value function to estimate expected returns and compute advantages for action selection.
+  </p>
+
+  <h3 id="dpo">Direct Preference Optimization (DPO)</h3>
+  <p>
+      DPO and its variants offer alternatives to traditional RL:
+  </p>
+
+  <p>
+      <strong>Standard DPO</strong> directly optimizes policy parameters based on preference data, without a separate reward model. It simplifies the training process while achieving comparable or better performance than PPO-based methods in many scenarios.
+  </p>
+
+  <h3 id="training-verifiers">Training verifiers and reward models</h3>
+  <p>
+      Effective verifiers are crucial for both inference scaling and learning-to-reason:
+  </p>
+
+  <p>
+      <strong>Outcome Reward Models (ORMs)</strong> evaluate only the final answer, providing a simpler but less informative signal for optimization. They can be trained with binary classification (correct/incorrect) or pairwise preference data.
+  </p>
+
+  <h2 id="domain-specific" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Domain-Specific Reasoning Applications</h2>
+  <hr>
+
+  <h3 id="mathematical">Mathematical reasoning</h3>
+  <p>
+      Mathematical reasoning has served as a critical testbed for LLM reasoning capabilities:
+  </p>
+
+  <p>
+      <strong>Informal Approaches</strong> treat math problems as natural language tasks, fine-tuning LLMs on carefully curated problem-solving datasets. Systems like DeepSeekMath and MetaMath have demonstrated impressive capabilities by combining mathematical text training with tree-based search and tool integration.
+  </p>
+
+  <h3 id="code-generation">Code generation</h3>
+  <p>
+      Code generation represents another domain where reasoning is especially valuable:
+  </p>
+
+  <p>
+      <strong>Function-Level Completion</strong> has evolved into more complex <strong>Competition-Level Coding</strong>, with models tackling problems requiring multi-step reasoning and algorithmic thinking. Recent advances like DeepSeek-R1 and OpenAI's o3 have shown that end-to-end reinforcement learning can produce highly capable coding models.
+  </p>
+
+  <h3 id="tabular-data">Tabular data reasoning</h3>
+  <p>
+      Reasoning over structured data presents unique challenges:
+  </p>
+
+  <p>
+      <strong>Table Transformation</strong> methods convert tabular data into formats that LLMs can process effectively. Techniques include serialization, specialized prompting, and embedding methods to preserve structural information.
+  </p>
+
+  <h3 id="game-theoretic">Game-theoretic reasoning</h3>
+  <p>
+      Strategic social reasoning in game-theoretic scenarios requires sophisticated cognitive abilities:
+  </p>
+
+  <p>
+      <strong>Theory-of-Mind Modeling</strong> enables LLMs to attribute mental states to themselves and others, improving understanding and reasoning in social scenarios. Recent studies show that LLMs exhibit ToM capabilities that can be leveraged for strategic reasoning.
+  </p>
+
+  <h2 id="key-trends" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Key Trends and Breakthroughs</h2>
+  <hr>
+
+  <h3 id="shift">The shift from inference scaling to learning</h3>
+  <p>
+      A clear trend in LLM reasoning is the transition from inference-time techniques to learning-based approaches:
+  </p>
+
+  <p>
+      <strong>Early Success of Inference Scaling</strong> like Chain-of-Thought prompting demonstrated that LLMs could reason more effectively with additional test-time computation. These methods proved valuable for enhancing performance without the cost of retraining.
+  </p>
+
+  <h3 id="agentic-systems">The emergence of agentic reasoning systems</h3>
+  <p>
+      Another significant trend is the evolution from standalone models to agentic systems:
+  </p>
+
+  <p>
+      <strong>Single-Agent Systems</strong> enhance LLMs with tool use, retrieval, and environmental interaction, dramatically expanding their capabilities. Recent systems like OpenAI's Deep Research demonstrate how agents can leverage the web and specialized tools to solve complex problems beyond the reach of standalone models.
+  </p>
+
+  <h3 id="milestones">Recent model milestones (DeepSeek-R1, OpenAI o1)</h3>
+  <p>
+      Recent breakthroughs highlight the rapid progress in LLM reasoning:
+  </p>
+
+  <p>
+      <strong>OpenAI's o1</strong> demonstrated the effectiveness of inference-time scaling in domains like mathematics, coding, and scientific problem-solving. It showed how structured thinking processes can dramatically improve performance on complex tasks requiring multi-step reasoning.
+  </p>
+
+  <h2 id="open-challenges" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Open Challenges and Future Directions</h2>
+  <hr>
+
+  <h3 id="evaluating">Evaluating reasoning beyond outcomes</h3>
+  <p>
+      Current evaluation methods often focus solely on whether models arrive at correct answers, neglecting the quality of the reasoning process:
+  </p>
+
+  <p>
+      <strong>Process Evaluation</strong> remains challenging, as it's difficult even for humans to assess reasoning quality consistently. Recent approaches use metrics for coherence, redundancy, factuality, and contextual faithfulness, but more comprehensive frameworks are needed.
+  </p>
+
+  <h3 id="understanding-mechanisms">Understanding reasoning mechanisms</h3>
+  <p>
+      Despite impressive empirical results, our theoretical understanding of how LLMs reason remains limited:
+  </p>
+
+  <p>
+      <strong>Empirical Analysis</strong> reveals that LLMs show strong performance on arithmetic, logical, and algorithmic reasoning but struggle with non-symbolic tasks and tool-augmented reasoning. Studies of model activations suggest different layers specialize in different aspects of reasoning.
+  </p>
+
+  <h3 id="data-challenges">Data challenges in scaling reasoning capabilities</h3>
+  <p>
+      The data requirements for training reasoning models present significant challenges:
+  </p>
+
+  <p>
+      <strong>Limited High-Quality Data</strong> for reasoning tasks makes it difficult to scale supervised learning approaches. This is particularly true for competition-level problems and specialized domains where expert annotations are scarce.
+  </p>
+
+  <h3 id="cost-aware">Cost-aware training approaches</h3>
+  <p>
+      As models and training procedures grow more complex, efficiency becomes increasingly important:
+  </p>
+
+  <p>
+      <strong>Dynamic Resource Allocation</strong> methods predict the difficulty of queries and allocate computation accordingly, optimizing the tradeoff between cost and performance. This can make inference more efficient by focusing resources where they're most needed.
+  </p>
+
+  <h2 id="conclusion" style="font-weight: bold; margin-top: -80px; padding-top: 80px;">Conclusion</h2>
+  <hr>
+
+  <h3 id="future">The future of reasoning in LLMs</h3>
+  <p>
+      The evolution of LLM reasoning capabilities represents one of the most exciting frontiers in AI research:
+  </p>
+
+  <p>
+      <strong>Integrated Approaches</strong> that combine the strengths of different regimes and architectures are likely to dominate future developments. Models that learn to reason effectively while leveraging strategic inference-time techniques offer a promising path forward.
+  </p>
+
+  <h3 id="implications">Implications for AI development</h3>
+  <p>
+      The advancement of reasoning capabilities in LLMs has profound implications for AI development:
+  </p>
+
+  <p>
+      <strong>Path to More Capable AI</strong> systems that can tackle increasingly complex problems requiring multi-step thinking and strategic planning. Reasoning capabilities may prove essential for progress toward more general artificial intelligence.
+  </p>
+
+  <p>
+      As research continues to advance along both the regime and architecture dimensions, we can expect LLM reasoning to become increasingly sophisticated, reliable, and useful across a growing range of applications. The journey from inference to learning represents not just a technical evolution but a fundamental shift in how we approach the development of intelligent systems—one that may ultimately lead to AI systems capable of the kind of deliberate, step-by-step thinking that has long been considered a hallmark of human intelligence.
+  </p>
 
 </div>
 
