@@ -422,15 +422,15 @@
       But what exactly constitutes reasoning in LLMs? At its core, LLM reasoning involves going beyond direct pattern recognition to generate a step-by-step thinking process in the form of "question → reasoning steps → answer." Rather than simply producing answers from questions, reasoning LLMs can articulate their thought process, making their decision-making more transparent and often more accurate.
   </p>
 
-  <!-- Figure Section -->
-  <div class="l-body">
-    <figure>
-        <img class="img-fluid rounded z-depth-1" src="fig/fig1.png" alt="Description of the figure for accessibility">
-        <figcaption style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
-            Optional caption for the figure if needed.
-        </figcaption>
-    </figure>
-  </div>
+<!-- Figure Section -->
+<div class="l-body">
+  <figure>
+      <img class="img-fluid rounded z-depth-1" src="fig/fig1.png" alt="Description of the figure for accessibility">
+      <figcaption style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+          Optional caption for the figure if needed.
+      </figcaption>
+  </figure>
+</div>
 
   <h3 id="understanding-llm">Understanding LLM reasoning and why it matters</h3>
   <p>
@@ -621,7 +621,7 @@
   <p>
       Effective verifiers are crucial for both inference scaling and learning-to-reason:
   </p>
-
+  
   <p>
       <strong>Outcome Reward Models (ORMs)</strong> evaluate only the final answer, providing a simpler but less informative signal for optimization. They can be trained with binary classification (correct/incorrect) or pairwise preference data.
   </p>
@@ -650,18 +650,18 @@
   <h3 id="tabular-data">Tabular data reasoning</h3>
   <p>
       Reasoning over structured data presents unique challenges:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Table Transformation</strong> methods convert tabular data into formats that LLMs can process effectively. Techniques include serialization, specialized prompting, and embedding methods to preserve structural information.
   </p>
 
   <h3 id="game-theoretic">Game-theoretic reasoning</h3>
   <p>
       Strategic social reasoning in game-theoretic scenarios requires sophisticated cognitive abilities:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Theory-of-Mind Modeling</strong> enables LLMs to attribute mental states to themselves and others, improving understanding and reasoning in social scenarios. Recent studies show that LLMs exhibit ToM capabilities that can be leveraged for strategic reasoning.
   </p>
 
@@ -671,27 +671,27 @@
   <h3 id="shift">The shift from inference scaling to learning</h3>
   <p>
       A clear trend in LLM reasoning is the transition from inference-time techniques to learning-based approaches:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Early Success of Inference Scaling</strong> like Chain-of-Thought prompting demonstrated that LLMs could reason more effectively with additional test-time computation. These methods proved valuable for enhancing performance without the cost of retraining.
   </p>
 
   <h3 id="agentic-systems">The emergence of agentic reasoning systems</h3>
   <p>
       Another significant trend is the evolution from standalone models to agentic systems:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Single-Agent Systems</strong> enhance LLMs with tool use, retrieval, and environmental interaction, dramatically expanding their capabilities. Recent systems like OpenAI's Deep Research demonstrate how agents can leverage the web and specialized tools to solve complex problems beyond the reach of standalone models.
   </p>
 
   <h3 id="milestones">Recent model milestones (DeepSeek-R1, OpenAI o1)</h3>
   <p>
       Recent breakthroughs highlight the rapid progress in LLM reasoning:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>OpenAI's o1</strong> demonstrated the effectiveness of inference-time scaling in domains like mathematics, coding, and scientific problem-solving. It showed how structured thinking processes can dramatically improve performance on complex tasks requiring multi-step reasoning.
   </p>
 
@@ -701,36 +701,36 @@
   <h3 id="evaluating">Evaluating reasoning beyond outcomes</h3>
   <p>
       Current evaluation methods often focus solely on whether models arrive at correct answers, neglecting the quality of the reasoning process:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Process Evaluation</strong> remains challenging, as it's difficult even for humans to assess reasoning quality consistently. Recent approaches use metrics for coherence, redundancy, factuality, and contextual faithfulness, but more comprehensive frameworks are needed.
   </p>
 
   <h3 id="understanding-mechanisms">Understanding reasoning mechanisms</h3>
   <p>
       Despite impressive empirical results, our theoretical understanding of how LLMs reason remains limited:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Empirical Analysis</strong> reveals that LLMs show strong performance on arithmetic, logical, and algorithmic reasoning but struggle with non-symbolic tasks and tool-augmented reasoning. Studies of model activations suggest different layers specialize in different aspects of reasoning.
   </p>
 
   <h3 id="data-challenges">Data challenges in scaling reasoning capabilities</h3>
   <p>
       The data requirements for training reasoning models present significant challenges:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Limited High-Quality Data</strong> for reasoning tasks makes it difficult to scale supervised learning approaches. This is particularly true for competition-level problems and specialized domains where expert annotations are scarce.
   </p>
 
   <h3 id="cost-aware">Cost-aware training approaches</h3>
   <p>
       As models and training procedures grow more complex, efficiency becomes increasingly important:
-  </p>
+    </p>
 
-  <p>
+    <p>
       <strong>Dynamic Resource Allocation</strong> methods predict the difficulty of queries and allocate computation accordingly, optimizing the tradeoff between cost and performance. This can make inference more efficient by focusing resources where they're most needed.
   </p>
 
