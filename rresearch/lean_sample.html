@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Lean 4 Formalized Mathematics — Salman Rahman</title>
+  <meta name="description" content="15 curated Lean 4 formalized mathematics problems with full proofs.">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&family=Roboto+Slab:wght@300;400;700&display=swap">
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --navy:   #2C3E50;
+      --blue:   #007bff;
+      --light:  #f5f8fa;
+      --border: #e0e0e0;
+      --code-bg: #1e1e2e;
+      --code-fg: #cdd6f4;
+      --comment:#6c7086;
+      --keyword:#cba6f7;
+      --string: #a6e3a1;
+      --number: #fab387;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 15px;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── Top Bar ── */
+    .topbar {
+      background: #f9f9f9;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 16px; }
+    .topbar-back {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .topbar-back:hover { text-decoration: underline; }
+    .topbar-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy);
+    }
+    .topbar-count {
+      font-size: 12px;
+      color: #888;
+      background: #eee;
+      border-radius: 10px;
+      padding: 2px 10px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a252f 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 2rem;
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    .hero p {
+      margin: 0 auto;
+      font-size: 14px;
+      color: rgba(255,255,255,.65);
+    }
+
+    /* ── Main ── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    /* ── Problem Card ── */
+    .problem-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 24px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .problem-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+
+    .card-header {
+      background: var(--light);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .num-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .problem-id {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      color: #555;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .card-header-spacer { flex: 1; }
+    .lean-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: #4b3c6e;
+      color: #d0c0f0;
+      border-radius: 4px;
+      padding: 2px 8px;
+      letter-spacing: .4px;
+    }
+
+    .card-body { padding: 20px 24px; }
+
+    .statement-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .statement {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    /* ── Proof Toggle ── */
+    .proof-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      font-family: 'Roboto', sans-serif;
+    }
+    .proof-toggle-btn:hover { background: var(--blue); color: #fff; }
+    .proof-toggle-btn .arrow { font-size: 10px; transition: transform .2s; }
+    .proof-toggle-btn.open .arrow { transform: rotate(90deg); }
+
+    /* ── Code Block ── */
+    .proof-block {
+      display: none;
+      margin-top: 16px;
+    }
+    .proof-block.visible { display: block; }
+
+    .code-wrapper {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--code-bg);
+    }
+    .code-topbar {
+      background: #181825;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .code-lang {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7f849c;
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: .6px;
+    }
+    .copy-btn {
+      background: #313244;
+      border: none;
+      color: #cdd6f4;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      transition: background .15s;
+    }
+    .copy-btn:hover { background: #45475a; }
+    .copy-btn.copied { color: #a6e3a1; }
+
+    pre.lean-code {
+      margin: 0;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--code-fg);
+      background: var(--code-bg);
+    }
+
+    /* Lean syntax colours (applied via JS) */
+    .lk { color: var(--keyword); } /* keywords */
+    .lc { color: var(--comment); font-style: italic; } /* comments */
+    .ls { color: var(--string); }  /* strings / names */
+    .ln { color: var(--number); }  /* numbers */
+    .lt { color: #89dceb; }        /* tactics */
+    .lm { color: #f38ba8; }        /* math symbols */
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: #aaa;
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    .footer a { color: var(--blue); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Loading ── */
+    .loading {
+      text-align: center;
+      padding: 64px 24px;
+      color: #888;
+      font-size: 15px;
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #e0e0e0;
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.5rem; }
+      .card-body { padding: 16px; }
+      pre.lean-code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<nav class="topbar">
+  <div class="topbar-left">
+    <a href="/" class="topbar-back">&#8592; salmanrahman.net</a>
+    <span class="topbar-title">Lean 4 Samples</span>
+  </div>
+  <span class="topbar-count" id="count-badge">15 problems</span>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <h1>Lean 4 Formalized Mathematics</h1>
+  <p>Source: <a href="https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs" target="_blank" style="color:rgba(255,255,255,.85); text-decoration: underline;">Goedel-LM/Lean-workbook-proofs</a></p>
+</header>
+
+<!-- Main Content -->
+<main class="main">
+  <div id="problems-container">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading problems…
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  Curated by <a href="/">Salman Rahman</a> &mdash;
+  UCLA Ph.D. &middot;
+  Proofs verified with <a href="https://leanprover.github.io/" target="_blank">Lean 4</a> + 
+  <a href="https://leanprover-community.github.io/mathlib4_docs/" target="_blank">Mathlib</a>
+</footer>
+
+<script>
+// ── Lean syntax highlighter (lightweight, regex-based) ──────────────────────
+function highlightLean(code) {
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const keywords = [
+    'import','open','set_option','theorem','def','lemma','example','by',
+    'intro','have','use','apply','exact','rw','simp','norm_num','linarith',
+    'nlinarith','ring','ring_nf','decide','constructor','cases','cases\'',
+    'simp_all','aesop','positivity','exfalso','fun','if','then','else',
+    'return','where','with','match','induction','show','calc','suffices',
+    'obtain','rcases','refine','push_neg','contrapose','tauto','omega',
+    'field_simp','gcongr','congr','ext','rfl','trivial','assumption'
+  ];
+  const tactics = keywords.slice(7);
+
+  // Process line by line to handle comments correctly
+  const lines = code.split('\n');
+  const result = lines.map(rawLine => {
+    const line = esc(rawLine);
+
+    // Full-line comment (--) or block comment line
+    const lineComment = line.match(/^(\s*)(--.*)/);
+    if (lineComment) {
+      return lineComment[1] + `<span class="lc">${lineComment[2]}</span>`;
+    }
+
+    // Inline -- comment
+    let processed = line;
+
+    // Highlight keywords
+    keywords.forEach(kw => {
+      const re = new RegExp(`(?<![\\w'])\\b(${kw})\\b(?![\\w'])`, 'g');
+      processed = processed.replace(re, '<span class="lk">$1</span>');
+    });
+
+    // Numbers
+    processed = processed.replace(/\b(\d+)\b/g, '<span class="ln">$1</span>');
+
+    // Inline comment at end of line
+    processed = processed.replace(/(--[^<]*)$/, '<span class="lc">$1</span>');
+
+    return processed;
+  });
+
+  return result.join('\n');
+}
+
+// ── Extract problem statement from proof comment ──────────────────────────
+function extractStatement(proof) {
+  const m = proof.match(/\/- ([\s\S]+?) -\//);
+  return m ? m[1].trim().replace(/\\n/g, ' ') : '';
+}
+
+// ── Build a single problem card ──────────────────────────────────────────
+function buildCard(problem, idx) {
+  const id = problem.problem_id;
+  const proof = problem.full_proof;
+  const statement = extractStatement(proof);
+
+  const card = document.createElement('div');
+  card.className = 'problem-card';
+
+  // Header
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="num-badge">${idx + 1}</div>
+      <code class="problem-id">${id}</code>
+      <div class="card-header-spacer"></div>
+      <span class="lean-badge">Lean 4</span>
+    </div>
+    <div class="card-body">
+      <div class="statement-label">Problem Statement</div>
+      <div class="statement" id="stmt-${idx}">${statement}</div>
+      <button class="proof-toggle-btn" id="btn-${idx}" aria-expanded="false">
+        <span class="arrow">&#9658;</span><span class="btn-text"> Show Proof</span>
+      </button>
+      <div class="proof-block" id="proof-${idx}">
+        <div class="code-wrapper">
+          <div class="code-topbar">
+            <span class="code-lang">lean4</span>
+            <button class="copy-btn" id="copy-${idx}">Copy</button>
+          </div>
+          <pre class="lean-code" id="code-${idx}"></pre>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Set code via textContent (safe — no HTML injection)
+  const codeEl = card.querySelector(`#code-${idx}`);
+  codeEl.innerHTML = highlightLean(proof);
+
+  // Toggle proof visibility
+  const btn = card.querySelector(`#btn-${idx}`);
+  const proofBlock = card.querySelector(`#proof-${idx}`);
+  btn.addEventListener('click', () => {
+    const isOpen = proofBlock.classList.toggle('visible');
+    btn.classList.toggle('open', isOpen);
+    btn.querySelector('.arrow').innerHTML = isOpen ? '&#9660;' : '&#9658;';
+    btn.setAttribute('aria-expanded', isOpen);
+    btn.querySelector('.btn-text').textContent = isOpen ? ' Hide Proof' : ' Show Proof';
+  });
+
+  // Copy button
+  const copyBtn = card.querySelector(`#copy-${idx}`);
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(proof).then(() => {
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+
+  return card;
+}
+
+// ── Load and render all problems ─────────────────────────────────────────
+async function loadProblems() {
+  const container = document.getElementById('problems-container');
+  try {
+    const res = await fetch('../assets/data/curated_problems.jsonl');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const problems = text.trim().split('\n').map(line => JSON.parse(line));
+
+    document.getElementById('count-badge').textContent = `${problems.length} problems`;
+    container.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+    problems.forEach((p, i) => fragment.appendChild(buildCard(p, i)));
+    container.appendChild(fragment);
+
+    // Typeset math
+    if (window.MathJax && MathJax.typesetPromise) {
+      await MathJax.typesetPromise([container]);
+    }
+  } catch (err) {
+    container.innerHTML = `<div class="loading" style="color:#e74c3c;">
+      Failed to load problems: ${err.message}
+    </div>`;
+    console.error(err);
+  }
+}
+
+loadProblems();
+</script>
+</body>
+</html>
